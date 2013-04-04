@@ -1,0 +1,15 @@
+INSERT INTO roles(id_r,"name")VALUES(1,'uczestnik');
+INSERT INTO roles(id_r,"name")VALUES(11,'sprzedawca');
+INSERT INTO roles(id_r,"name")VALUES(111,'administrator');
+INSERT INTO statuses(id_s,name)VALUES(2,'złożone');
+INSERT INTO statuses(id_s,name)VALUES(4,'wrealizacji');
+INSERT INTO statuses(id_s,name)VALUES(6,'zrealizowane');
+INSERT INTO statuses(id_s,name)VALUES(8,'anulowane');
+INSERT INTO salepoints(id_sp,"name")VALUES(5,'Centrala');
+INSERT INTO salepoints(id_sp,"name")VALUES(10,'INTERNET');
+INSERT INTO users(id_u,blocked_points,last_login,last_order_realization,last_points,"name","password",surname,id_register_point,id_role,id_work_sp)VALUES(50,0,'2000-01-01 00:00:00','2000-01-01 00:00:00','2000-01-01 00:00:00','DagobertBaldwin','admin','Krześmirski',5,111,5);
+INSERT INTO users(id_u,blocked_points,last_login,last_order_realization,last_points,"name","password",surname,id_register_point,id_role,id_work_sp)VALUES(201,0,'2000-01-01 00:00:00','2000-01-01 00:00:00','2000-01-01 00:00:00','user','user','user',5,1,5);
+INSERT INTO users(id_u,blocked_points,last_login,last_order_realization,last_points,"name","password",surname,id_register_point,id_role,id_work_sp)VALUES(202,0,'2000-01-01 00:00:00','2000-01-01 00:00:00','2000-01-01 00:00:00','sell','sell','sell',5,11,5);
+INSERT INTO invoices(id_i,amount,extra,order_registration,id_i_salepoint,id_seller,id_user)VALUES(204,1000,1000,'2013-03-20 20:27:49.594',5,50,201);
+INSERT INTO items(id_i,"cost","name")VALUES(203,150,'przedmiot');
+SELECT setval('public.hibernate_sequence',210,true);
