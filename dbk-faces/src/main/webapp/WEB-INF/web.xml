@@ -1,28 +1,50 @@
 <!DOCTYPE web-app PUBLIC
  "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
-
 <web-app>
     <display-name>DBK with PrimeFaces</display-name>
-
+    <!-- CONFIGURATION FILES both Bean definition and security -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value> 
+        classpath:/applicationContext.xml
+        classpath:/jsfspring-sec-bean-config.xml 
+        classpath:/jsfspring-sec-security-config.xml
+        </param-value>
+    </context-param>
     <context-param>
         <param-name>javax.faces.PROJECT_STAGE</param-name>
         <param-value>Development</param-value>
     </context-param>
-
-
+    <!-- Integrate JSF and Spring End -->
+    <!-- Enable Spring Filter, Spring Security works on the concept of Filters -->
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class> org.springframework.web.filter.DelegatingFilterProxy 
+        </filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <!-- Enable JSF Server End -->
+    <!-- Integrate JSF and Spring -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
-    
+    <!-- Enable Spring Filter End -->
+    <!-- Welcome File -->
     <welcome-file-list>
-        <welcome-file>index.xhtml</welcome-file>
+        <welcome-file>pages/home/home.xhtml</welcome-file>
     </welcome-file-list>
+    <!-- Welcome File End -->
 </web-app>

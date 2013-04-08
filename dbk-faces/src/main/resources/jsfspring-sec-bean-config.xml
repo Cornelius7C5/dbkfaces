@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:sec="http://www.springframework.org/schema/security"
+    xsi:schemaLocation="
+    http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans-3.1.xsd 
+    http://www.springframework.org/schema/security 
+    http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+    <beans:bean
+        id="navigator"
+        name="navigator"
+        class="pl.spot.dbk.faces.bean.Navigator"
+        scope="session">
+    </beans:bean>
+    <beans:bean
+        id="dataSource"
+        class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <beans:property
+            name="driverClassName"
+            value="org.postgresql.Driver" />
+        <beans:property
+            name="url"
+            value="jdbc:postgresql://localhost:5433/dbk" />
+        <beans:property
+            name="username"
+            value="dbk" />
+        <beans:property
+            name="password"
+            value="dbk" />
+    </beans:bean>
+</beans:beans>

@@ -4,15 +4,41 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
     version="2.0">
+    <!-- Enable Spring -->
+    <application>
+        <el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+    </application>
+    <!-- Simple Navigation Rule -->
+    <!-- If user keys in ToSecure, move to /pages/secure/secured.xhtml -->
+    <!-- Else If user keys in ToUnSecure, move to /pages/unsecure/unsecured.xhtml -->
     <navigation-rule>
-        <from-view-id>/index.xhtml</from-view-id>
+        <display-name>pages/home/home.xhtml</display-name>
+        <from-view-id>/pages/home/home.xhtml</from-view-id>
         <navigation-case>
-            <from-outcome>true</from-outcome>
-            <to-view-id>welcome.xhtml</to-view-id>
+            <from-action>#{navigator.navigateTo}</from-action>
+            <from-outcome>Secured</from-outcome>
+            <to-view-id>/pages/secure/secured.xhtml</to-view-id>
+            <redirect></redirect>
         </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <display-name>pages/home/home.xhtml</display-name>
+        <from-view-id>/pages/home/home.xhtml</from-view-id>
         <navigation-case>
-            <from-outcome>false</from-outcome>
-            <to-view-id>error.xhtml</to-view-id>
+            <from-action>#{navigator.navigateTo}</from-action>
+            <from-outcome>UnSecured</from-outcome>
+            <to-view-id>/pages/unsecure/unsecured.xhtml</to-view-id>
+            <redirect></redirect>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <display-name>pages/home/home.xhtml</display-name>
+        <from-view-id>/pages/home/home.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{navigator.navigateTo}</from-action>
+            <from-outcome>Items</from-outcome>
+            <to-view-id>/pages/secure/items.xhtml</to-view-id>
+            <redirect></redirect>
         </navigation-case>
     </navigation-rule>
 </faces-config>
