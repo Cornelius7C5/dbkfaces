@@ -1,8 +1,12 @@
 package pl.spot.dbk.faces.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -15,7 +19,9 @@ import pl.spot.dbk.faces.HibernateUtil;
 import pl.spot.dbk.faces.hib.Item;
 
 @ManagedBean(name = "itemBean", eager = true)
-public class ItemBean {
+@ViewScoped
+public class ItemBean implements Serializable {
+    private static final long serialVersionUID = 6950897039685041858L;
 
     Logger log = LoggerFactory.getLogger(ItemBean.class);
 
@@ -89,6 +95,11 @@ public class ItemBean {
         } finally {
             session.close();
         }
+        FacesContext.getCurrentInstance()
+                .addMessage(
+                        null,
+                        new FacesMessage(FacesMessage.SEVERITY_INFO, "Przedmiot dodany:", "Nazwa: " + name + " Koszt: "
+                                + cost));
         return ret;
 
     }
@@ -115,6 +126,19 @@ public class ItemBean {
         } finally {
             session.close();
         }
+    }
 
+    public void delete(Item item) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = session.beginTransaction();
+        try {
+            session.delete(item);
+            tx.commit();
+        } catch (Exception e) {
+            tx.rollback();
+            log.error("Error", e);
+        } finally {
+            session.close();
+        }
     }
 }

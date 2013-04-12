@@ -1,5 +1,6 @@
 package pl.spot.dbk.faces.hib;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -12,7 +13,9 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "ITEMS")
-public class Item {
+public class Item implements Serializable {
+    private static final long serialVersionUID = 7480962874799165043L;
+    
     @Id
     @GeneratedValue
     @Column(name = "id_i")

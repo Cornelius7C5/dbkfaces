@@ -4,13 +4,15 @@
   xmlns:f="http://java.sun.com/jsf/core">
 <h:head></h:head>
 <h:body>
-  <h:form id="homePageFormId">
-    <h:outputLabel value="Select your resource, depending on selection you may be asked to login"></h:outputLabel>
-    <br></br>
-    <h:inputText name="option" value="#{navigator.pageToNavigate}" id="optionId" required="True"
-      requiredMessage="Please Enter page to navigate, valid values are Items, ToSecure and ToUnSecure"></h:inputText>
-    <h:commandButton value="Navigate" action="#{navigator.navigateTo}">
-    </h:commandButton>
-  </h:form>
+  <p:panel>
+    <h:form id="homePageFormId">
+      <h:outputLabel value="Select your resource, depending on selection you may be asked to login"></h:outputLabel>
+      <br></br>
+      <h:inputText name="option" value="#{navigator.pageToNavigate}" id="optionId" required="True"
+        requiredMessage="Please Enter page to navigate, valid values are ToItems, ToAddItems, ToSecure and ToUnSecure"></h:inputText>
+      <h:commandButton value="Navigate" action="#{navigator.navigateTo}">
+      </h:commandButton>
+    </h:form>
+  </p:panel>
 </h:body>
 </html>

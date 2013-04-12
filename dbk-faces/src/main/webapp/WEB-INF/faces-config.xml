@@ -8,11 +8,16 @@
     <application>
         <el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
     </application>
+    <managed-bean>
+        <managed-bean-name>userBean</managed-bean-name>
+        <managed-bean-class>pl.spot.dbk.faces.bean.UserBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
     <!-- Simple Navigation Rule -->
     <!-- If user keys in ToSecure, move to /pages/secure/secured.xhtml -->
     <!-- Else If user keys in ToUnSecure, move to /pages/unsecure/unsecured.xhtml -->
     <navigation-rule>
-        <display-name>pages/home/home.xhtml</display-name>
+        <display-name>pages/home</display-name>
         <from-view-id>/pages/home/home.xhtml</from-view-id>
         <navigation-case>
             <from-action>#{navigator.navigateTo}</from-action>
@@ -20,25 +25,53 @@
             <to-view-id>/pages/secure/secured.xhtml</to-view-id>
             <redirect></redirect>
         </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <display-name>pages/home/home.xhtml</display-name>
-        <from-view-id>/pages/home/home.xhtml</from-view-id>
         <navigation-case>
             <from-action>#{navigator.navigateTo}</from-action>
             <from-outcome>UnSecured</from-outcome>
             <to-view-id>/pages/unsecure/unsecured.xhtml</to-view-id>
             <redirect></redirect>
         </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <display-name>pages/home/home.xhtml</display-name>
-        <from-view-id>/pages/home/home.xhtml</from-view-id>
         <navigation-case>
             <from-action>#{navigator.navigateTo}</from-action>
             <from-outcome>Items</from-outcome>
-            <to-view-id>/pages/secure/items.xhtml</to-view-id>
+            <to-view-id>/pages/secure/admin/items.xhtml</to-view-id>
             <redirect></redirect>
         </navigation-case>
+        <navigation-case>
+            <from-action>#{navigator.navigateTo}</from-action>
+            <from-outcome>AddItems</from-outcome>
+            <to-view-id>/pages/secure/admin/addItem.xhtml</to-view-id>
+            <redirect></redirect>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <display-name>pages/secure/admin/items</display-name>
+        <from-view-id>/pages/secure/admin/items.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{navigator.goToAddItems}</from-action>
+            <from-outcome>AddItems</from-outcome>
+            <to-view-id>/pages/secure/admin/addItem.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <display-name>pages/secure/admin/addItem</display-name>
+        <from-view-id>/pages/secure/admin/addItem.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{navigator.goToListItems}</from-action>
+            <from-outcome>Items</from-outcome>
+            <to-view-id>/pages/secure/admin/items.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+    	<display-name>pages/home</display-name>
+    	<from-view-id>/pages/home/home.xhtml</from-view-id>
+    	<navigation-case>
+    		<from-action>#{navigator.navigateTo}</from-action>
+    		<from-outcome>ToUsers</from-outcome>
+    		<to-view-id>/pages/secure/admin/users.xhtml</to-view-id>
+    		<redirect />
+    	</navigation-case>
     </navigation-rule>
 </faces-config>

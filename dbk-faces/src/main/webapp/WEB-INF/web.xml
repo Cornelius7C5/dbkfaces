@@ -6,15 +6,17 @@
     <!-- CONFIGURATION FILES both Bean definition and security -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value> 
-        classpath:/applicationContext.xml
-        classpath:/jsfspring-sec-bean-config.xml 
-        classpath:/jsfspring-sec-security-config.xml
+        <param-value> classpath:/applicationContext.xml classpath:/jsfspring-sec-bean-config.xml
+            classpath:/jsfspring-sec-security-config.xml 
         </param-value>
     </context-param>
     <context-param>
         <param-name>javax.faces.PROJECT_STAGE</param-name>
         <param-value>Development</param-value>
+    </context-param>
+    <context-param>
+        <param-name>primefaces.THEME</param-name>
+        <param-value>black-tie</param-value>
     </context-param>
     <!-- Integrate JSF and Spring End -->
     <!-- Enable Spring Filter, Spring Security works on the concept of Filters -->

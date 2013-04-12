@@ -11,14 +11,29 @@
         auto-config="true"
         use-expressions="true">
         <intercept-url
-            pattern="/pages/secure/**"
-            access="hasAnyRole('ROLE_USER','ROLE_ADMINISTRATOR','ROLE_UCZESTNIK','ROLE_SPRZEDAWCA')" />
+            pattern="/pages/secure/admin**"
+            access="hasRole(ROLE_ADMINISTRATOR)" />
+        <intercept-url
+            pattern="/pages/secure/user**"
+            access="hasRole(ROLE_UCZESTNIK)" />
+        <intercept-url
+            pattern="/pages/secure/cso**"
+            access="hasRole(ROLE_SPRZEDAWCA)" />
+        <!-- <intercept-url -->
+        <!-- pattern="/pages/secure/**" -->
+        <!-- access="hasAnyRole('ROLE_UCZESTNIK','ROLE_SPRZEDAWCA')" /> -->
         <intercept-url
             pattern="/pages/unsecure/**"
             access="permitAll" />
         <intercept-url
             pattern="/**"
             access="permitAll" />
+        <intercept-url
+            pattern="/javax.faces.resource/**"
+            access="permitAll" />
+        <logout
+            delete-cookies="true"
+            invalidate-session="true" />
     </http>
     <authentication-manager alias="authenticationManager">
         <authentication-provider>

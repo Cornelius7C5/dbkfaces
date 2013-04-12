@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:f="http://java.sun.com/jsf/core">
+<h:head></h:head>
+<h:body>
+  <h:form>
+    <p:panel>
+      <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+      <p:growl autoUpdate="true" />
+      <h:panelGrid columns="3">
+        <h:outputText value="Imię/imiona:" />
+        <p:inputText id="name" value="#{userBean.name}" required="true" label="text" requiredMessage="Pole wymagane" />
+        <p:message for="name" display="text" />
+        <h:outputText value="Nazwisko:" />
+        <p:inputText id="surname" value="#{userBean.surname}" required="true" label="text"
+          requiredMessage="Pole wymagane" />
+        <p:message for="surname" display="text" />
+        <h:outputText value="Hasło:" />
+        <p:password id="password" value="#{userBean.password}" required="true" requiredMessage="Pole wymagane" />
+        <p:message for="password" display="text" />
+        <h:outputText value="Rola:" />
+        <p:selectOneMenu id="role" value="#{userBean.role}" required="true" requiredMessage="Pole wymagane"
+          validator="#{userBean.validateRole}" converter="#{roleConverter}">
+          <f:selectItem itemValue="#{null}" itemLabel="-- Wybierz --" />
+          <f:selectItems value="#{commonBean.listRoles}" />
+        </p:selectOneMenu>
+        <p:message for="role" display="text" />
+        <h:outputText value="Punkt rejestracji:" />
+        <p:selectOneMenu id="registerPoint" value="#{userBean.registerPoint_id}" required="true" converter="#{spConverter}"
+          requiredMessage="Pole wymagane">
+          <f:selectItem itemValue="#{null}" itemLabel="-- Wybierz --" />
+          <f:selectItems value="#{commonBean.listSP}" var="rsp" itemValue="#{rsp.id_sp}" itemLabel="#{rsp.name}"/>
+        </p:selectOneMenu>
+        <p:message for="registerPoint" display="text" />
+        <h:outputText value="Punkt pracy:" />
+        <p:selectOneMenu id="workSalePoint" value="#{userBean.workSalePoint_id}" required="true" converter="#{spConverter}"
+          requiredMessage="Pole wymagane">
+          <f:selectItem itemValue="#{null}" itemLabel="-- Wybierz --" />
+          <f:selectItems value="#{commonBean.listSP}" var="wsp" itemValue="#{wsp.id_sp}" itemLabel="#{wsp.name}"/>
+        </p:selectOneMenu>
+        <p:message for="workSalePoint" display="text" />
+        <p:commandButton actionListener="#{userBean.save}" value="Stwórz" update="@form" />
+      </h:panelGrid>
+      <h:outputText value="Wszystkie pola sa wymagane." style="font-size:75%;color:red" />
+    </p:panel>
+  </h:form>
+</h:body>
+</html>
